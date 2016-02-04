@@ -6412,7 +6412,7 @@ uint8_t blink = InverseBlink ;
 		{
 			lcd_puts_Pleft( y, PSTR(STR_MULTI_TYPE));
 			uint8_t attr = g_model.sub_protocol ;
-			g_model.sub_protocol = checkIndexed( y, FWx10"\017"MULTI_STR, g_model.sub_protocol&0x1F, (sub==subN) ) + (g_model.sub_protocol&0xE0);
+			g_model.sub_protocol = checkIndexed( y, FWx10"\021"MULTI_STR, g_model.sub_protocol&0x1F, (sub==subN) ) + (g_model.sub_protocol&0xE0);
 			if(g_model.sub_protocol==attr)
 				attr=(g_model.ppmNCH >> 4) &0x07 ;
 			else
@@ -6453,6 +6453,14 @@ uint8_t blink = InverseBlink ;
 			else if ( x == M_CG023 )
 			{
 				s=XPSTR(FWx10"\002"M_CG023_STR);
+			}
+			else if ( x == M_MT99XX )
+			{
+				s=XPSTR(FWx10"\002"M_MT99XX_STR);
+			}
+			else if ( x == M_MJXQ )
+			{
+				s=XPSTR(FWx10"\003"M_MJXQ_STR);
 			}
 			else
 			{
@@ -6882,7 +6890,7 @@ uint8_t blink = InverseBlink ;
 		{
 			lcd_puts_Pleft( y, PSTR(STR_MULTI_TYPE));
 			uint8_t attr = g_model.xsub_protocol ;
-			g_model.xsub_protocol = checkIndexed( y, FWx10"\017"MULTI_STR, g_model.xsub_protocol&0x1F, (sub==subN) ) + (g_model.xsub_protocol&0xE0);
+			g_model.xsub_protocol = checkIndexed( y, FWx10"\021"MULTI_STR, g_model.xsub_protocol&0x1F, (sub==subN) ) + (g_model.xsub_protocol&0xE0);
 			if(g_model.xsub_protocol==attr)
 				attr=(g_model.xppmNCH >> 4) &0x07 ;
 			else
@@ -6923,6 +6931,14 @@ uint8_t blink = InverseBlink ;
 			else if ( x == M_CG023 )
 			{
 				s=XPSTR(FWx10"\002"M_CG023_STR);
+			}
+			else if ( x == M_MT99XX )
+			{
+				s=XPSTR(FWx10"\002"M_MT99XX_STR);
+			}
+			else if ( x == M_MJXQ )
+			{
+				s=XPSTR(FWx10"\003"M_MJXQ_STR);
 			}
 			else
 			{
