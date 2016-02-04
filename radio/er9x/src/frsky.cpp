@@ -1322,18 +1322,8 @@ void FRSKY_Init( uint8_t brate)
 
   	if ( brate == 0 ) // 9600
 	{
-#ifdef MULTI_PROTOCOL
-		if ( g_model.protocol == PROTO_MULTI ) // 100000bps
-		{
-			UBRR0L = 9;
-			UBRR0H = 0;
-		}
-		else
-#endif // MULTI_PROTOCOL
-		{
-			UBRR0L = UBRRL_VALUE;
-			UBRR0H = UBRRH_VALUE;
-		}
+		UBRR0L = UBRRL_VALUE;
+		UBRR0H = UBRRH_VALUE;
 	}
 	else // 57600
 	{
@@ -1345,8 +1335,12 @@ void FRSKY_Init( uint8_t brate)
   // set 8 N1
   UCSR0B = 0 | (0 << RXCIE0) | (0 << TXCIE0) | (0 << UDRIE0) | (0 << RXEN0) | (0 << TXEN0) | (0 << UCSZ02);
 #ifdef MULTI_PROTOCOL
-	if ( g_model.protocol == PROTO_MULTI ) // set 8e2
+	if ( g_model.protocol == PROTO_MULTI ) // set 100000bps 8e2
+	{
+		UBRR0L = 9;
+		UBRR0H = 0;
 		UCSR0C = 0 | (1<<UPM01)|(1<<USBS0)|(1<<UCSZ01)|(1<<UCSZ00);
+	}
 	else
 #endif // MULTI_PROTOCOL
 		UCSR0C = 0 | (1 << UCSZ01) | (1 << UCSZ00);
@@ -1506,7 +1500,7 @@ void check_frsky()
 		return ;
 #endif
 
-	uint8_t telemetryType = g_model.protocol == PROTO_PXX ;
+	uint8_t telemetryType = (g_model.protocol == PROTO_PXX )||((g_model.protocol == PROTO_MULTI) && ((g_model.sub_protocol&0x1F)==M_FRSKYX));
 	if ( telemetryType != FrskyTelemetryType )
 	{
 		FRSKY_Init( telemetryType ) ;	

@@ -11280,7 +11280,7 @@ Str_Protocol
 //#ifdef V2
 //				g_model.sub_protocol = checkIndexed( y, PSTR(FWx10"\015"MULTI_STR), g_model.sub_protocol, (sub==subN) ) ;
 //#else
-				g_model.sub_protocol = checkIndexed( y, PSTR(FWx10"\017"MULTI_STR), g_model.sub_protocol&0x1F, (sub==subN) ) + (g_model.sub_protocol&0xE0);
+				g_model.sub_protocol = checkIndexed( y, PSTR(FWx10"\021"MULTI_STR), g_model.sub_protocol&0x1F, (sub==subN) ) + (g_model.sub_protocol&0xE0);
 //#endif
 				uint8_t ppmNch = g_model.ppmNCH ;
 				if(g_model.sub_protocol==attr)
@@ -11323,6 +11323,14 @@ Str_Protocol
 				else if ( x == M_CG023 )
 				{
 					s=PSTR(FWx10"\002"M_CG023_STR);
+				}
+				else if ( x == M_MT99XX )
+				{
+					s=PSTR(FWx10"\002"M_MT99XX_STR);
+				}
+				else if ( x == M_MJXQ )
+				{
+					s=PSTR(FWx10"\003"M_MJXQ_STR);
 				}
 				else
 				{
